@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Searchable;
+namespace Dixyd\Searchable;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -30,18 +30,18 @@ class ModelSearchAspect extends SearchAspect
     }
 
     /**
-     * @param string $model
-     * @param array|\Closure $attributes
+     * @param  string  $model
+     * @param  array|\Closure  $attributes
      *
-     * @throws \Spatie\Searchable\Exceptions\InvalidSearchableModel
+     * @throws \Dixyd\Searchable\Exceptions\InvalidSearchableModel
      */
     public function __construct(string $model, $attributes = [])
     {
-        if (! is_subclass_of($model, Model::class)) {
+        if ( ! is_subclass_of($model, Model::class)) {
             throw InvalidSearchableModel::notAModel($model);
         }
 
-        if (! is_subclass_of($model, Searchable::class)) {
+        if ( ! is_subclass_of($model, Searchable::class)) {
             throw InvalidSearchableModel::modelDoesNotImplementSearchable($model);
         }
 
@@ -93,7 +93,7 @@ class ModelSearchAspect extends SearchAspect
         return $model->getTable();
     }
 
-    public function getResults(string $term, User $user = null): Collection
+    public function getResults(string $term, $params, User $user = null): Collection
     {
         if (empty($this->attributes)) {
             throw InvalidModelSearchAspect::noSearchableAttributes($this->model);
@@ -112,13 +112,14 @@ class ModelSearchAspect extends SearchAspect
 
     protected function addSearchConditions(Builder $query, string $term)
     {
-        $attributes = $this->attributes;
+        $attributes  = $this->attributes;
         $searchTerms = explode(' ', $term);
 
-        $query->where(function (Builder $query) use ($attributes, $term, $searchTerms) {
+        $query->where(function (Builder $query) use ($attributes, $term, $searchTerms)
+        {
             foreach (Arr::wrap($attributes) as $attribute) {
                 foreach ($searchTerms as $searchTerm) {
-                    $sql = "LOWER({$attribute->getAttribute()}) LIKE ?";
+                    $sql        = "LOWER({$attribute->getAttribute()}) LIKE ?";
                     $searchTerm = mb_strtolower($searchTerm, 'UTF8');
 
                     $attribute->isPartial()

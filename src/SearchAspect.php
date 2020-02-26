@@ -1,13 +1,13 @@
 <?php
 
-namespace Spatie\Searchable;
+namespace Dixyd\Searchable;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 abstract class SearchAspect
 {
-    abstract public function getResults(string $term): Collection;
+    abstract public function getResults(string $term, array $params): Collection;
 
     public function getType(): string
     {

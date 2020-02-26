@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\Searchable;
+namespace Dixyd\Searchable;
 
 class SearchResult
 {
-    /** @var \Spatie\Searchable\Searchable */
+    /** @var \Dixyd\Searchable\Searchable */
     public $searchable;
 
     /** @var string */

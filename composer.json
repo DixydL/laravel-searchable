@@ -1,11 +1,11 @@
 {
-    "name": "spatie/laravel-searchable",
+    "name": "dixyd/laravel-searchable",
     "description": "Pragmatically search through models and other sources",
     "keywords": [
-        "spatie",
+        "dixyd",
         "laravel-searchable"
     ],
-    "homepage": "https://github.com/spatie/laravel-searchable",
+    "homepage": "https://github.com/DixydL/laravel-searchable",
     "license": "MIT",
     "authors": [
         {
@@ -32,12 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Searchable\\": "src"
+            "Dixyd\\Searchable\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Searchable\\Tests\\": "tests"
+            "Dixyd\\Searchable\\Tests\\": "tests"
         }
     },
     "scripts": {

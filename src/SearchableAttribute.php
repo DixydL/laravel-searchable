@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Searchable;
+namespace Dixyd\Searchable;
 
 class SearchableAttribute
 {

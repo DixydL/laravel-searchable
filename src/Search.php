@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Searchable;
+namespace Dixyd\Searchable;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Arr;
@@ -10,9 +10,9 @@ class Search
     protected $aspects = [];
 
     /**
-     * @param string|\Spatie\Searchable\SearchAspect $searchAspect
+     * @param  string|\Dixyd\Searchable\SearchAspect  $searchAspect
      *
-     * @return \Spatie\Searchable\Search
+     * @return \Dixyd\Searchable\Search
      */
     public function registerAspect($searchAspect): self
     {
@@ -47,18 +47,19 @@ class Search
         return $this->aspects;
     }
 
-    public function search(string $query, ?User $user = null): SearchResultCollection
+    public function search(string $query, array $params = [], ?User $user = null): SearchResultCollection
     {
-        return $this->perform($query, $user);
+        return $this->perform($query, $params, $user);
     }
 
-    public function perform(string $query, ?User $user = null): SearchResultCollection
+    public function perform(string $query, array $params = [], ?User $user = null): SearchResultCollection
     {
         $searchResults = new SearchResultCollection();
 
         collect($this->getSearchAspects())
-            ->each(function (SearchAspect $aspect) use ($query, $user, $searchResults) {
-                $searchResults->addResults($aspect->getType(), $aspect->getResults($query, $user));
+            ->each(function (SearchAspect $aspect) use ($query,$params, $user, $searchResults)
+            {
+                $searchResults->addResults($aspect->getType(), $aspect->getResults($query,$params, $user));
             });
 
         return $searchResults;

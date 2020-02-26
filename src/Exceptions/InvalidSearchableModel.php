@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Searchable\Exceptions;
+namespace Dixyd\Searchable\Exceptions;
 
 use Exception;
 
